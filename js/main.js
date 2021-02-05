@@ -24,7 +24,8 @@ const renderPage = num => {
         const renderCtx = {
             canvasContext: ctx,
             viewport
-        }
+        };
+
         page.render(renderCtx).promise.then(() => {
             pageIsRendering = false;
 
@@ -72,8 +73,18 @@ pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
 
     document.querySelector('#page-count').textContent = pdfDoc.numPages;
 
-    renderPage(pageNum)
-});
+    renderPage(pageNum);
+    })
+    .catch(err => {
+        //DISPLAY ERROR
+        const div = document.createElement('div');
+        div.className = 'error';
+        div.appendChild(document.createTextNode(err.message));
+        document.querySelector('body').insertBefore(div, canvas);
+
+        //REMOVE TOP BAR
+        document.querySelector('.top-bar').style.display = 'none';
+    });
 
 // BUTTON EVENT
 document.querySelector('#prev-page').addEventListener('click', showPrevPage);
