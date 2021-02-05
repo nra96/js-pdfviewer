@@ -74,7 +74,7 @@ pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
     document.querySelector('#page-count').textContent = pdfDoc.numPages;
 
     renderPage(pageNum);
-    })
+})
     .catch(err => {
         //DISPLAY ERROR
         const div = document.createElement('div');
